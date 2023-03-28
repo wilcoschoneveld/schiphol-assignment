@@ -1,8 +1,11 @@
 import express from "express";
 import fs from "fs";
+import cors from "cors";
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+app.use(cors());
 
 app.get("/flights", async (req, res) => {
   const { airport, limit, order_by } = req.query;
