@@ -13,13 +13,17 @@ interface ApiResponse {
     flights: Flight[];
 }
 
-async function fetchData(airport: string, limit = 5) {
+async function fetchData(airport: string, dateAscending: boolean, limit = 5) {
     const response = await fetch(
         "http://localhost:3000/flights?" +
-            new URLSearchParams({ airport, limit: limit.toString() })
+            new URLSearchParams({
+                airport,
+                limit: limit.toString(),
+                order_by: dateAscending ? "date:asc" : "date:desc",
+            })
     );
-    const data = await response.json();
 
+    const data = await response.json();
     return data as ApiResponse;
 }
 
