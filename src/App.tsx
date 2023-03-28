@@ -11,6 +11,7 @@ function App() {
     const [state, setState] = useState<State>("init");
     const [searchValue, setSearchValue] = useState<string>();
     const [dateAscending, setDateAscending] = useState(true);
+    const [enterKeyPressCount, setEnterKeyPressCount] = useState(0);
     const [flights, setFlights] = useState<Flight[]>([]);
     const debounceTimer = useRef<number>();
 
@@ -34,7 +35,7 @@ function App() {
         }
 
         return () => controller.abort();
-    }, [searchValue, dateAscending]);
+    }, [searchValue, dateAscending, enterKeyPressCount]);
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         clearTimeout(debounceTimer.current);
@@ -48,6 +49,7 @@ function App() {
         if (event.key === "Enter") {
             clearTimeout(debounceTimer.current);
             setSearchValue((event.target as HTMLInputElement).value);
+            setEnterKeyPressCount(enterKeyPressCount + 1); // to allow force re-fetch with same search value
         }
     }
 
