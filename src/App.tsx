@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fetchData, Flight } from "./api";
 import "./App.css";
 import FlightCard from "./components/FlightCard";
@@ -10,14 +10,13 @@ type State = "init" | "loading" | "success" | "error";
 
 function App() {
     const [state, setState] = useState<State>("init");
-    const [searchedValue, setSearchedValue] = useState<string>();
+    const [searchValue, setSearchValue] = useState<string>();
     const [dateAscending, setDateAscending] = useState(true);
     const [flights, setFlights] = useState<Flight[]>([]);
     const debounceTimer = useRef<number>();
 
-    function searchFlights(searchValue: string) {
+    useEffect(() => {
         if (searchValue && searchValue.length >= 3) {
-            setSearchedValue(searchValue);
             setState("loading");
             fetchData(searchValue, dateAscending)
                 .then((response) => {
@@ -27,13 +26,15 @@ function App() {
                 .catch(() => {
                     setState("error");
                 });
+        } else {
+            setState("init");
         }
-    }
+    }, [searchValue, dateAscending]);
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         clearTimeout(debounceTimer.current);
         debounceTimer.current = setTimeout(
-            () => searchFlights(event.target.value),
+            () => setSearchValue(event.target.value),
             1000
         );
     }
@@ -41,7 +42,7 @@ function App() {
     function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
         if (event.key === "Enter") {
             clearTimeout(debounceTimer.current);
-            searchFlights((event.target as HTMLInputElement).value);
+            setSearchValue((event.target as HTMLInputElement).value);
         }
     }
 
@@ -77,7 +78,7 @@ function App() {
             {state === "success" &&
                 (flights.length === 0 ? (
                     <Message>
-                        No flights found to airport matching "{searchedValue}"
+                        No flights found to airport matching "{searchValue}"
                     </Message>
                 ) : (
                     flights.map((flight) => (
