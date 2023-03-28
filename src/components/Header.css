@@ -1,0 +1,11 @@
+.title {
+    background-image: var(--gradient-flights);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.title-icon {
+    color: var(--morning-pink);
+    transform: rotate(30deg);
+}

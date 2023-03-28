@@ -1,23 +1,23 @@
 @keyframes rotation {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .loader {
-  position: relative;
-  width: 100px;
-  height: 100px;
+    position: relative;
+    width: 100px;
+    height: 100px;
 }
 
 .arm {
-  position: absolute;
-  top: 38px;
-  display: flex;
-  width: 50px;
-  transform-origin: center right;
-  animation: rotation 1s infinite linear;
+    position: absolute;
+    top: 38px;
+    display: flex;
+    width: 50px;
+    transform-origin: center right;
+    animation: rotation 1s infinite linear;
 }

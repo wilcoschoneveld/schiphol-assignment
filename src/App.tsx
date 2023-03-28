@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { fetchData, Flight } from "./api";
 import "./App.css";
 import FlightCard from "./components/FlightCard";
+import Header from "./components/Header";
 import Loader from "./components/Loader";
 import Message from "./components/Message";
 
@@ -46,16 +47,31 @@ function App() {
 
     return (
         <div>
-            <input
-                type="search"
-                onChange={handleChange}
-                onKeyDown={handleKeyDown}
-            ></input>
-            <div onClick={() => setDateAscending(!dateAscending)}>
-                Order by date {dateAscending ? "ascending" : "descending"}
+            <div className="bg-white flex column align-center mb-2">
+                <Header />
+                <div className="flex mb-2 align-center">
+                    <input
+                        type="search"
+                        className="p-05 font-medium"
+                        placeholder="Destination airport"
+                        onChange={handleChange}
+                        onKeyDown={handleKeyDown}
+                    ></input>
+                    <div
+                        className="flex ml-1 pointer user-select-none"
+                        onClick={() => setDateAscending(!dateAscending)}
+                    >
+                        Order by date
+                        <span className="material-icons dusk-green">
+                            {dateAscending ? "south" : "north"}
+                        </span>
+                    </div>
+                </div>
             </div>
             {state === "init" && (
-                <Message>Use the search field to find flights</Message>
+                <Message>
+                    Search for a destination airport to find flights
+                </Message>
             )}
             {state === "loading" && <Loader />}
             {state === "success" &&

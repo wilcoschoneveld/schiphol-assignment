@@ -1,0 +1,122 @@
+.flex {
+    display: flex;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-start {
+    align-items: start;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.font-medium {
+    font-size: medium;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.gap-1 {
+    gap: 1rem;
+}
+
+.m-1 {
+    margin: 1rem;
+}
+
+.ml-1 {
+    margin-left: 1rem;
+}
+
+.mb-1 {
+    margin-bottom: 1rem;
+}
+
+.mb-2 {
+    margin-bottom: 2rem;
+}
+
+.p-05 {
+    padding: 0.5rem;
+}
+
+.p-1 {
+    padding: 1rem;
+}
+
+.p-2 {
+    padding: 2rem;
+}
+
+.w-max-50 {
+    max-width: 50rem;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.user-select-none {
+    user-select: none;
+}
+
+.bg-white {
+    background: #fff;
+}
+
+.box-shadow {
+    box-shadow: 0 0.0125em 0.75rem 0 rgba(20, 18, 81, 0.1);
+}
+
+.m-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.grey-storm {
+    color: var(--grey-storm);
+}
+.grey-overcast {
+    color: var(--grey-overcast);
+}
+.grey-broken {
+    color: var(--grey-broken);
+}
+.grey-scattered {
+    color: var(--grey-scattered);
+}
+.grey-few {
+    color: var(--grey-few);
+}
+
+.morning-pink {
+    color: var(--morning-pink);
+}
+.lightmorning-pink {
+    color: var(--lightmorning-pink);
+}
+.lightmorning-blue {
+    color: var(--lightmorning-blue);
+}
+.dusk-green {
+    color: var(--dusk-green);
+}
+.dusk-blue {
+    color: var(--dusk-blue);
+}
+.evening-pink {
+    color: var(--evening-pink);
+}
+.evening-lilac {
+    color: var(--evening-lilac);
+}
