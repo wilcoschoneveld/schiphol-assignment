@@ -11,7 +11,7 @@ app.get("/flights", async (req, res) => {
   const { airport, limit, order_by } = req.query;
 
   await new Promise((resolve) => setTimeout(resolve, 2000 + 500 * Math.random()));
-  const rawData = fs.readFileSync("flights.json");
+  const rawData = fs.readFileSync("server/flights.json");
 
   let flights = JSON.parse(rawData)["flights"];
 
