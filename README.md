@@ -35,12 +35,13 @@ Please don't spend more than that unless you're having fun and want to show off 
 
 # Uitwerking Wilco
 
+1. Run `npm install`
+2. Backend server aanzetten met `node server/index.js` (endpoint: http://localhost:3000/flights)
+3. Frontend app draaien met `npm run dev`, navigeer naar http://localhost:5173/
+4. Testen kan je draaien met `npm run test`
+
 Ik heb een simpele express server gemaakt waarmee je de flights.json kan opvragen met de query parameters `airport`, `limit` en `order_by`. Er zit wat random delay in om server vertraging te simuleren.
 
 De frontend is gemaakt met React en Vite dev server. Je kan typen in het input field en dan begint hij gelijk te "zoeken". Er zit een debounce op, je kan ook op enter drukken. Ik heb ook een abort controller toegevoegd om server requests te annuleren als er een nieuwe zoekopdracht gedaan wordt. Ik heb een hele basic implementatie van een state machine om duidelijk onderscheid te maken tussen loading, succes en error states.
 
-Wat styling betreft heb ik zelf wat utility classes gemaakt a la tailwind in utils.css. Eslint en prettier voor DX. Google material icon font voor vliegtuig icoontje in title en loading spinner en sorting arrow.
-
-1. Run `npm install`
-2. Backend server aanzetten met `node server/index.js` (endpoint: http://localhost:3000/flights)
-3. Frontend app draaien met `npm run dev`, navigeer naar http://localhost:5173/
+Ik heb wat testen gemaakt met Vitest. Eslint en prettier voor DX. Wat styling betreft heb ik zelf wat utility classes gemaakt a la tailwind in utils.css. Google material icon font voor vliegtuig icoontje in title en loading spinner en sorting arrow.
