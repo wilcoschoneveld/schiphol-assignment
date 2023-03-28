@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchData, Flight } from "../api";
+import FlightCard from "./FlightCard";
 
 interface Props {
     airport?: string;
@@ -25,7 +26,7 @@ export default function FlightSearch({ airport }: Props) {
         <div>
             Test
             {flights.map((flight) => (
-                <div>Flight: {flight.flightIdentifier}</div>
+                <FlightCard flight={flight} />
             ))}
         </div>
     );
