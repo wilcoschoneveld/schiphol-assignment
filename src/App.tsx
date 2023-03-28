@@ -39,7 +39,7 @@ function App() {
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         clearTimeout(debounceTimer.current);
-        debounceTimer.current = setTimeout(
+        debounceTimer.current = window.setTimeout(
             () => setSearchValue(event.target.value),
             1000
         );
@@ -49,7 +49,7 @@ function App() {
         if (event.key === "Enter") {
             clearTimeout(debounceTimer.current);
             setSearchValue((event.target as HTMLInputElement).value);
-            setEnterKeyPressCount(enterKeyPressCount + 1); // to allow force re-fetch with same search value
+            setEnterKeyPressCount((count) => count + 1); // to allow force re-fetch with same search value
         }
     }
 
