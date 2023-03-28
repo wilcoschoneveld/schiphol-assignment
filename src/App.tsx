@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { fetchData, Flight } from "./api";
-import "./App.css";
 import FlightCard from "./components/FlightCard";
 import Header from "./components/Header";
 import Loader from "./components/Loader";
