@@ -16,19 +16,25 @@ function App() {
     const debounceTimer = useRef<number>();
 
     useEffect(() => {
+        const controller = new AbortController();
+
         if (searchValue && searchValue.length >= 3) {
             setState("loading");
-            fetchData(searchValue, dateAscending)
+            fetchData(searchValue, dateAscending, controller.signal)
                 .then((response) => {
                     setFlights(response.flights);
                     setState("success");
                 })
                 .catch(() => {
-                    setState("error");
+                    if (!controller.signal.aborted) {
+                        setState("error");
+                    }
                 });
         } else {
             setState("init");
         }
+
+        return () => controller.abort();
     }, [searchValue, dateAscending]);
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
