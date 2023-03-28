@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchData, Flight } from "../api";
 import FlightCard from "./FlightCard";
+import Loader from "./Loader";
 
 interface Props {
     airport?: string;
@@ -25,6 +26,7 @@ export default function FlightSearch({ airport, dateAscending }: Props) {
 
     return (
         <div>
+            {state === "loading" && <Loader />}
             {state === "success" &&
                 flights.map((flight) => (
                     <FlightCard key={flight.flightIdentifier} flight={flight} />
