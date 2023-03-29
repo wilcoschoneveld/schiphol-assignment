@@ -25,7 +25,7 @@ function App() {
                     setFlights(response.flights);
                     setState("success");
                 })
-                .catch(() => {
+                .catch((error) => {
                     if (!controller.signal.aborted) {
                         setState("error");
                     }

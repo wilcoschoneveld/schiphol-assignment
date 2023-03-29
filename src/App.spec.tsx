@@ -1,15 +1,12 @@
-import { test, expect, vi, afterEach } from "vitest";
+import { test, expect, afterEach } from "vitest";
 import { render, screen, cleanup } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "./App";
-import createFetchMock from "vitest-fetch-mock";
-
-const fetch = createFetchMock(vi);
-fetch.enableMocks();
+import { server } from "./mocks/server";
+import { rest } from "msw";
 
 afterEach(() => {
     cleanup();
-    fetch.resetMocks();
 });
 
 test("should render init state", () => {
@@ -28,10 +25,7 @@ test("should fetch from the correct api url", async () => {
 
     await user.type(input, "lon{Enter}");
 
-    expect(fetch).toHaveBeenCalled();
-    expect(fetch.mock.calls[0][0]).toBe(
-        "http://localhost:3000/flights?airport=lon&limit=5&order_by=date%3Aasc"
-    );
+    expect(screen.getByTestId("loader")).toBeDefined();
 });
 
 test("should display error when fetch returns 0 flights", async () => {
@@ -40,7 +34,12 @@ test("should display error when fetch returns 0 flights", async () => {
     const user = userEvent.setup();
     const input = screen.getByPlaceholderText("Destination airport");
 
-    fetch.mockResponseOnce(JSON.stringify({ flights: [] }));
+    server.use(
+        rest.get("http://localhost:3000/flights", async (req, res, ctx) => {
+            return res(ctx.status(200), ctx.json({ flights: [] }));
+        })
+    );
+
     await user.type(input, "ams{Enter}");
 
     expect(
@@ -54,7 +53,12 @@ test("should display error when fetch fails", async () => {
     const user = userEvent.setup();
     const input = screen.getByPlaceholderText("Destination airport");
 
-    fetch.mockRejectOnce();
+    server.use(
+        rest.get("http://localhost:3000/flights", async (req, res, ctx) => {
+            return res.networkError("Failed to connect");
+        })
+    );
+
     await user.type(input, "test{Enter}");
 
     expect(

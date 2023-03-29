@@ -1,3 +1,5 @@
+import { fetch } from "cross-fetch";
+
 export interface Flight {
     flightIdentifier: string;
     flightNumber: string;
